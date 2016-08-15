@@ -15,7 +15,7 @@ resource "aws_instance" "phpmyadmin" {
   instance_type = "${var.instance_size}"
   key_name = "${var.key_name}"
   user_data = "${data.template_file.init.rendered}"
-  vpc_security_group_ids = "${split(",",var.security_group_id)}"
+  vpc_security_group_ids = ["${split(",",var.security_group_id)}"]
   subnet_id = "${var.subnet_id}"
 
   tags {
