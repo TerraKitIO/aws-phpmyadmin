@@ -1,0 +1,20 @@
+#cloud-config
+repo_update: true
+
+packages:
+  - ruby
+  - wget
+
+runcmd:
+  - echo "phpmyadmin phpmyadmin/internal/skip-preseed boolean true"  | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/setup-password password ${setup_password}" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/dbconfig-install boolean false" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/mysql/admin-pass password ${setup_password}" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/mysql/app-pass password ${setup_password}" | debconf-set-selections
+  - echo "phpmyadmin phpmyadmin/database-type select mysql" | debconf-set-selections
+  - echo "mysql-server mysql-server/root_password password ${setup_password}" | debconf-set-selections
+  - echo "mysql-server mysql-server/root_password_again password ${setup_password}" | debconf-set-selections
+  - apt-get install -y phpmyadmin mysql-server
+  - chmod g+w /var/lib/phpmyadmin/config.inc.php
