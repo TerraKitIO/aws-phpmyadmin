@@ -18,3 +18,9 @@ runcmd:
   - echo "mysql-server mysql-server/root_password_again password ${setup_password}" | debconf-set-selections
   - apt-get install -y phpmyadmin mysql-server
   - chmod g+w /var/lib/phpmyadmin/config.inc.php
+
+write_files:
+-   path: /etc/phpmyadmin/conf.d/999-myconfig.php
+    owner: root
+    permissions: '0644'
+    content: ${config_file_contents}

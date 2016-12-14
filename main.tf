@@ -28,5 +28,6 @@ data "template_file" "init" {
 
     vars {
         setup_password = "${var.phpmyadmin_setup_password}"
+        config_file_contents = "${var.configuration}"
     }
 }

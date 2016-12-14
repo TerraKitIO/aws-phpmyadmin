@@ -1,3 +1,6 @@
+variable "configuration" {
+  description = "The full contents of your PMA configuration file."
+}
 variable "subnet_id" {
   description = "AWS Subnet to launch EC2 instance in"
 }
