@@ -23,4 +23,5 @@ write_files:
 -   path: /etc/phpmyadmin/conf.d/999-myconfig.php
     owner: root
     permissions: '0644'
+    encoding: b64
     content: ${config_file_contents}
